@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Router} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link} from 'react-router-dom';
 
 const baseURL = process.env.ENDPOINT;
 
@@ -20,21 +20,48 @@ class Weather extends React.Component {
     super(props);
 
     this.state = {
+      dt: 0,
       icon: "",
+      description: "",
+      temp: 0,
+      humidity: 0,
+      pressure: 0,
+      windSpeed: 0,
+      feels_like: 0,
     };
   }
 
   async componentDidMount() {
     const weather = await getWeatherFromApi();
-    this.setState({icon: weather.icon.slice(0, -1)});
+    this.setState({
+      icon: weather.icon.slice(0, -1),
+      description: weather.description,
+      temp: weather.temp,
+      humidity: weather.humidity,
+      pressure: weather.pressure,
+      windSpeed: weather.windSpeed,
+      feels_like: weather.feels_like
+    });
   }
 
   render() {
-    const { icon } = this.state;
+    const { icon, description, temp, humidity, pressure, windSpeed, feels_like } = this.state;
 
     return (
-      <div className="icon">
-        { icon && <img src={`/img/${icon}.svg`} /> }
+      <div>
+        <Link className="nav-link" to="/forecast">See Forecast</Link>
+        <h1>Current weather</h1>
+        <div className="weather">
+          <div className="weather-item">
+            <div className='temperature'>{Math.round(temp)} °C</div>
+            { icon && <img src={`/img/${icon}.svg`} />}
+            <div>Feels Like: {Math.round(feels_like)} °C</div>
+            <div>Pressure: {pressure} hPa</div>
+            <div>Wind Speed: {windSpeed}</div>
+            <div>Humidity: {humidity}%</div>
+            <div>{description}</div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -58,6 +85,9 @@ class Forecast extends React.Component {
     const { forecast } = this.state;
 
     return (
+      <div>
+        <Link className="nav-link" to="/weather">See Current Weather</Link>
+        <h1>Forecast</h1>
       <div className="forecast">
         {forecast.map((forecastItem, index) => (
           <div key={index} className="forecast-item">
@@ -75,6 +105,7 @@ class Forecast extends React.Component {
           </div>
         ))}
       </div>
+      </div>
     );
   }
 }
@@ -83,6 +114,7 @@ class Forecast extends React.Component {
 ReactDOM.render(
   <Router>
     <Routes>
+      <Route path="/" element={<Weather />} />
       <Route path="/weather" element={<Weather />} />
       <Route path="/forecast" element={<Forecast />} />
     </Routes>
