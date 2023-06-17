@@ -29,6 +29,20 @@ router.get('/api/weather', async ctx => {
   ctx.body = weatherData.weather ? weatherData.weather[0] : {};
 });
 
+const fetchForecast = async () => {
+  const endpoint = `${mapURI}/forecast?q=${targetCity}&cnt=4&appid=${appId}&units=metric&`;
+  const response = await fetch(endpoint);
+
+  return response ? response.json() : {}
+};
+
+router.get('/api/forecast', async ctx => {
+  const forecastData = await fetchForecast();
+
+  ctx.type = 'application/json; charset=utf-8';
+  ctx.body = forecastData.list ? forecastData.list : {}; // dostęp do listy prognoz
+});
+
 app.use(router.routes());
 app.use(router.allowedMethods());
 

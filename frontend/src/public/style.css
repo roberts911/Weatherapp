@@ -12,3 +12,22 @@ body{
   width: 30vw;
   height: 30vw;
 }
+
+.forecast{
+  display: flex;
+}
+
+.forecast-item {
+  margin: 1em;
+  text-align: center;
+  font-weight: bold;
+}
+
+.temperature{
+  font-size: 20px;
+}
+
+.forecast-item img {
+  width: 150px;
+  height: 150px; 
+}
