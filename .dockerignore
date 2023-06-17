@@ -1,6 +1,7 @@
-node_modules
-npm-debug.log
-Dockerfile
+backend/node_modules
+frontend/node_modules
+/backend/Dockerfile
+/frontend/Dockerfile
 docker-compose.yml
 .dockerignore
 .git

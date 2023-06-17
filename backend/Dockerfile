@@ -1,5 +1,5 @@
 # Start od oficjalnego obrazu Node.js
-FROM node:14
+FROM node:16
 # Ustal katalog roboczy w kontenerze
 WORKDIR /app
 # Kopiuj pliki package.json i package-lock.json
