@@ -6,15 +6,45 @@ import {
 
 const baseURL = process.env.ENDPOINT;
 
+const getLocation = () => {
+  return new Promise((resolve, reject) => {
+    if (!navigator.geolocation) {
+      reject(new Error('Geolocation is not supported by your browser'));
+    } else {
+      navigator.geolocation.getCurrentPosition((position) => {
+        resolve({
+          lat: position.coords.latitude,
+          lon: position.coords.longitude
+        });
+      }, () => {
+        reject(new Error('Unable to retrieve your location'));
+      });
+    }
+  });
+};
+
 const getWeatherFromApi = async () => {
   try {
-    const response = await fetch(`${baseURL}/weather`);
+    const location = await getLocation();
+    const response = await fetch(`${baseURL}/weather?lat=${location.lat}&lon=${location.lon}`);
     return response.json();
   } catch (error) {
     console.error(error);
   }
 
   return {};
+};
+
+const getForecastFromApi = async () => {
+  try {
+    const location = await getLocation();
+    const response = await fetch(`${baseURL}/forecast?lat=${location.lat}&lon=${location.lon}`);
+    return response.json();
+  } catch (error) {
+    console.error(error);
+  }
+
+  return [];
 };
 
 class Weather extends React.Component {
@@ -29,6 +59,7 @@ class Weather extends React.Component {
       pressure: 0,
       windSpeed: 0,
       feelsLike: 0,
+      name: '',
     };
   }
 
@@ -42,18 +73,19 @@ class Weather extends React.Component {
       pressure: weather.pressure,
       windSpeed: weather.windSpeed,
       feelsLike: weather.feels_like,
+      name: weather.name
     });
   }
 
   render() {
     const {
-      icon, description, temp, humidity, pressure, windSpeed, feelsLike,
+      icon, description, temp, humidity, pressure, windSpeed, feelsLike,  name,
     } = this.state;
 
     return (
       <div>
         <Link className="nav-link" to="/forecast">See Forecast</Link>
-        <h1>Current weather</h1>
+        <h1>Current weather for {name}</h1>
         <div className="weather">
           <div className="weather-item">
             <div className="temperature">
@@ -101,7 +133,7 @@ class Forecast extends React.Component {
   }
 
   async componentDidMount() {
-    const forecast = await fetch(`${baseURL}/forecast`).then((response) => response.json());
+    const forecast = await getForecastFromApi();
     this.setState({ forecast });
   }
 
