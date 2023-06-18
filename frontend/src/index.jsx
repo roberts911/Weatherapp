@@ -108,7 +108,9 @@ class Weather extends React.Component {
             </div>
             <div>
               Wind Speed:
-              {windSpeed}
+              {Math.round(windSpeed)}
+              {' '}
+              km/h
             </div>
             <div>
               Humidity:

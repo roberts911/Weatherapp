@@ -35,7 +35,7 @@ router.get('/api/weather', async ctx => {
     feels_like: weatherData.main.feels_like,
     humidity: weatherData.main.humidity,
     windSpeed: weatherData.wind.speed,
-    name: weatherData.name
+    name: weatherData.name,
   } : {};
 });
 
