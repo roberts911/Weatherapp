@@ -2,7 +2,8 @@
 
 WeatherApp is a simple application that displays current weather and forecast for the upcoming hours for a chosen location. The application consists of a backend (built with Node.js) and a frontend (using React.js).
 
-![image](https://github.com/roberts911/Weatherapp/assets/85109223/6c673f3b-a97c-49e4-b5e2-7ea16ce65844)
+![image](https://github.com/roberts911/Weatherapp/assets/85109223/3929aaca-659d-4a96-bb07-b80d8bb5c6fe)
+
 
 ![image](https://github.com/roberts911/Weatherapp/assets/85109223/1facf9e6-d062-49c7-919e-f5e42b70987e)
 
