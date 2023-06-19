@@ -1,20 +1,41 @@
 {
+  // Use babel-eslint as the parser
   "parser": "babel-eslint",
+
+  // Extend the Airbnb style guide
   "extends": "airbnb",
+
+  // Set the environment: ES6, Node.js, and Browser globals
   "env": {
     "es6": true,
     "node": true,
     "browser": true
   },
+
+  // Define custom rules for the linter
   "rules": {
+    // Enforce the use of semicolons at the end of statements
     "semi": ["error", "always"],
+
+    // Enforce the use of trailing commas in multiline statements
     "comma-dangle": ["error", "always-multiline"],
+
+    // Allow console statements (e.g., console.log)
     "no-console": "off",
+
+    // Enforce a maximum of 2 classes per file
     "max-classes-per-file": ["error", 2],
+
+    // Turn off the rule for enforcing consistent linebreak style
     "linebreak-style": "off"
   },
+
+  // Define global variables
   "globals": {
+    // 'fetch' is a global function for making HTTP requests
     "fetch": false,
+
+    // 'document' is a global object in the browser environment
     "document": true
   }
 }
