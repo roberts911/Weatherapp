@@ -1,19 +1,47 @@
+# Specify Docker Compose file version
 version: '3'
+
+# Define services to be created
 services:
+
+  # Define the frontend service
   frontend:
+
+    # Specify the build context directory
     build: ./frontend
+
+    # Specify the command to run
     command: npm run start
+
+    # Specify directories to mount as volumes
     volumes:
+      # Mount the local frontend directory to /app in the container
       - ./frontend:/app
+
+      # Create a volume for node_modules to improve performance
       - /app/node_modules
+
+    # Map the container's port 8000 to the host's port 8000
     ports:
       - 8000:8000
 
+  # Define the backend service
   backend:
+
+    # Specify the build context directory
     build: ./backend
-    command: npm run dev  # zmieniamy 'start' na 'dev'
+
+    # Specify the command to run in 'development' mode
+    command: npm run dev  
+
+    # Specify directories to mount as volumes
     volumes:
+      # Mount the local backend directory to /app in the container
       - ./backend:/app
+
+      # Create a volume for node_modules to improve performance
       - /app/node_modules
+
+    # Map the container's port 9000 to the host's port 9000
     ports:
       - 9000:9000
