@@ -1,11 +1,14 @@
+// Import the necessary modules
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {
   BrowserRouter as Router, Route, Routes, Link,
 } from 'react-router-dom';
 
+// Declare the base URL for API calls
 const baseURL = process.env.ENDPOINT;
 
+// Function to get the current location of the user
 const getLocation = () => {
   return new Promise((resolve, reject) => {
     if (!navigator.geolocation) {
@@ -23,6 +26,7 @@ const getLocation = () => {
   });
 };
 
+// Function to get weather data from the API
 const getWeatherFromApi = async () => {
   try {
     const location = await getLocation();
@@ -35,6 +39,7 @@ const getWeatherFromApi = async () => {
   return {};
 };
 
+// Function to get weather forecast from the API
 const getForecastFromApi = async () => {
   try {
     const location = await getLocation();
@@ -47,10 +52,12 @@ const getForecastFromApi = async () => {
   return [];
 };
 
+// The Weather component, displaying current weather information
 class Weather extends React.Component {
   constructor(props) {
     super(props);
 
+    // Initialize state
     this.state = {
       icon: '',
       description: '',
@@ -63,6 +70,7 @@ class Weather extends React.Component {
     };
   }
 
+  // Called after component is mounted, fetches weather data from API
   async componentDidMount() {
     const weather = await getWeatherFromApi();
     this.setState({
@@ -76,7 +84,8 @@ class Weather extends React.Component {
       name: weather.name
     });
   }
-
+  
+  // Renders the Weather component
   render() {
     const {
       icon, description, temp, humidity, pressure, windSpeed, feelsLike,  name,
@@ -125,20 +134,24 @@ class Weather extends React.Component {
   }
 }
 
+// The Forecast component, displaying forecast information
 class Forecast extends React.Component {
   constructor(props) {
     super(props);
 
+    // Initialize state
     this.state = {
       forecast: [],
     };
   }
 
+  // Called after component is mounted, fetches forecast data from API
   async componentDidMount() {
     const forecast = await getForecastFromApi();
     this.setState({ forecast });
   }
 
+  // Renders the Forecast component
   render() {
     const { forecast } = this.state;
 
@@ -191,6 +204,7 @@ class Forecast extends React.Component {
   }
 }
 
+// Render the root component
 ReactDOM.render(
   <Router>
     <Routes>
