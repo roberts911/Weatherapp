@@ -1,17 +1,36 @@
 {
+  // Use babel-eslint as the parser
   "parser": "babel-eslint",
+  
+  // Extend the JavaScript Standard Style
   "extends": "standard",
+  
+  // Set the environment: ES6 and Node.js
   "env": {
     "es6": true,
     "node": true
   },
+  
+  // Define custom rules for the linter
   "rules": {
+    // Enforce the use of semicolons at the end of statements
     "semi": ["error", "always"],
+    
+    // Enforce the use of trailing commas in multiline situations, with exceptions for functions
     "comma-dangle": ["error", {
+      // Require trailing commas in multiline array literals
       "arrays": "always-multiline",
+      
+      // Require trailing commas in multiline object literals
       "objects": "always-multiline",
+      
+      // Require trailing commas in multiline import declarations
       "imports": "always-multiline",
+      
+      // Require trailing commas in multiline export declarations
       "exports": "always-multiline",
+      
+      // Disallow trailing commas in function declarations
       "functions": "never"
     }]
   }
