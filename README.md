@@ -44,8 +44,7 @@ localhost:8000
 ```
 
 ### Cloud Azure
-To run the application in Azure, navigate to
-https://weatherapprobertsiurek.azurewebsites.net
+To run the application in Azure, navigate to https://weatherapprobertsiurek.azurewebsites.net and grant access to your location.
 
 ## Future Improvements
 Below is a list of features and improvements that can be added in the future:
