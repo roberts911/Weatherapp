@@ -38,8 +38,13 @@ docker-compose build
 ```
 docker-compose up
 ```
+4. In your web browser, navigate to.
+```
+localhost:8000
+```
 
 ### Cloud Azure
+To run the application in Azure, navigate to
 https://weatherapprobertsiurek.azurewebsites.net
 
 ## Future Improvements
